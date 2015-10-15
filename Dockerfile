@@ -1,16 +1,9 @@
-FROM ubuntu:14.04
+FROM java:openjdk-8u45-jdk
 MAINTAINER stormcat24 <a.yamada24@gmail.com>
 
-# misc
-RUN apt-get update
-RUN apt-get install -y git
-RUN apt-get install -y openjdk-7-jdk
-
-
-# aeromock-brew
-RUN git clone https://github.com/CyberAgent/aeromock-brew.git
-RUN cd aeromock-brew && \
-    ./gradlew use -PaeromockVersion=0.2.4
+RUN apt-get install -y git && \
+    git clone https://github.com/CyberAgent/aeromock-brew.git && \
+    cd aeromock-brew && ./gradlew use -PaeromockVersion=latest
 
 # config
 ADD config.yaml /root/.aeromock/config.yaml
